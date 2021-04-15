@@ -1,44 +1,19 @@
-import React, { useEffect, useState } from 'react';
-import { Route, Switch, Redirect } from 'react-router-dom';
-import { ConnectedRouter } from 'connected-react-router';
-import { history } from './state-management/store';
-import { selectCartLoading } from './services/CartDetails/selectors';
-import { connect } from 'react-redux';
-import SavedOffers  from './containers/SavedOffers/SavedOffers'
+import React from 'react';
+import { Route, Switch, Redirect, BrowserRouter } from 'react-router-dom';
+import Dashboard from './containers/game-dashboard/game-dashboard.container'
 
-function Routes(props)
-{
+function Routes(props) {
 
-  const isCartDetailsLoading = props.isCartLoading;
-  const [showLoaderSpinner, showSpinner] = useState(false);
+  return (
+    <BrowserRouter >
+      <Switch>
+        <Route exact path="/" component={Dashboard} />
+        <Route render={() => <Redirect to="/" />} />
+      </Switch>
+    </BrowserRouter >
 
-
-    useEffect(() => {
-       isCartDetailsLoading  ? showSpinner(true) : showSpinner(false);
-    },[isCartDetailsLoading]);
-
-  return(
-    <ConnectedRouter history={history}>
-        {showLoaderSpinner && <div className="overlay-header">
-                <div id="loading-img"></div>
-            </div>}
-    <div className="view-container" className={`${showLoaderSpinner ? "blurred-all" : ""}`}>
-                {showLoaderSpinner && <div className="overlay-body">
-                </div>}
-       
-        <Switch> 
-          <Route exact path="/" component={SavedOffers} /> 
-          <Route render={() => <Redirect to="/" />} />
-        </Switch>
-    </div>`
-    </ConnectedRouter>
 
   )
 }
-const mapStateToProps = state => {
-  return {  
-    isCartLoading:selectCartLoading(state),
-    
-  }
-};
-export default connect(mapStateToProps)(Routes);
+
+export default Routes;

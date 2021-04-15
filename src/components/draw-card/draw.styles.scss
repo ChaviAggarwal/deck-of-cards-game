@@ -1,0 +1,19 @@
+.card-details {
+  .dropdown-container {
+    display: flex;
+    margin-bottom: 20px;
+    margin-left: 20px;
+  }
+  .draw-btn {
+    border-radius: 5%;
+    border: solid 1px black;
+    background-color: white;
+    margin-left: 20px;
+    width: 100px;
+    font-style: bold;
+    font-weight: bold;
+  }
+  .draw-container {
+    display: flex;
+  }
+}
